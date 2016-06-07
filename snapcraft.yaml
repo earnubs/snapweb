@@ -1,0 +1,28 @@
+name: webdm
+version: 0.19
+summary: Ubuntu Core Snappy Device Manager
+description: |
+  This service allows you to manage your Ubuntu Core device from a web interface or REST API.
+
+  Features include:
+
+  - manage updates to the system.
+  - control the state of other snappy packages.
+  - browse the store to install new snappy packages.
+confinement: strict
+apps:
+  snappyd:
+    daemon: simple
+    command: snappyd
+    plugs:
+      - network
+      - network-bind
+      - snapd-control
+parts:
+  snappyd:
+    plugin: make
+    build-packages:
+      - golang-go
+      - nodejs-legacy
+      - npm
+    source: .
